@@ -10,11 +10,11 @@
 <meta property="og:title" content="For the Good Days Ahead. A Design Concept">
 <meta property="og:description" content="An independent redesign concept of integrity.com. Prepared by Joseph Hasse as a capability demonstration; not an Integrity Marketing Group product.">
 <meta property="og:url" content="https://ha-c-repo.github.io/integrity-concept-site/">
-<meta property="og:image" content="https://ha-c-repo.github.io/integrity-concept-site/branch-hero.jpg">
+<meta property="og:image" content="https://ha-c-repo.github.io/integrity-concept-site/social-card.jpg">
 <meta property="og:image:width" content="1600">
 <meta property="og:image:height" content="964">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://ha-c-repo.github.io/integrity-concept-site/branch-hero.jpg">
+<meta name="twitter:image" content="https://ha-c-repo.github.io/integrity-concept-site/social-card.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
@@ -85,21 +85,27 @@ nav.scrolled{border-color:var(--line);padding:13px 5vw}
 
 /* ---------- hero ---------- */
 .hero{
-  position:relative;min-height:88vh;display:flex;flex-direction:column;
-  justify-content:center;align-items:center;text-align:center;
-  padding:60px 5vw 80px;overflow:hidden;
-  background:radial-gradient(120% 90% at 50% 0%,#fff 0%,var(--ivory) 55%,var(--mist) 100%);
+  position:relative;min-height:92vh;display:flex;flex-direction:column;
+  justify-content:flex-end;align-items:center;text-align:center;
+  padding:60px 5vw 120px;overflow:hidden;
+  background:url('branch-hero.jpg') center 30%/cover no-repeat, var(--ever-deep);
 }
+.hero::before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(to bottom,rgba(13,35,28,.28) 0%,rgba(13,35,28,.12) 34%,rgba(13,35,28,.52) 68%,rgba(13,35,28,.86) 100%);
+}
+.hero>*{position:relative}
 #dust{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .eyebrow{
   display:inline-flex;align-items:center;gap:16px;
-  color:var(--gold);font-family:var(--display);font-size:13px;letter-spacing:.4em;
+  color:var(--gold-soft);font-family:var(--display);font-size:13px;letter-spacing:.4em;
   text-transform:uppercase;font-weight:600;margin-bottom:40px;
 }
-.eyebrow::before,.eyebrow::after{content:"";width:44px;height:1px;background:var(--gold)}
+.eyebrow::before,.eyebrow::after{content:"";width:44px;height:1px;background:var(--gold-soft)}
 h1{
   font-family:var(--display);font-weight:700;text-transform:uppercase;
-  font-size:clamp(44px,7.6vw,110px);line-height:1.06;letter-spacing:.045em;
+  font-size:clamp(44px,7.2vw,104px);line-height:1.06;letter-spacing:.045em;
+  color:#fff;text-shadow:0 2px 30px rgba(13,35,28,.55);
   position:relative;z-index:2;
 }
 .line-mask{display:block;overflow:hidden;padding:.08em .12em;margin:-.04em -.12em}
@@ -115,7 +121,8 @@ h1{
 @keyframes sheen{0%,100%{background-position:180% 0}50%{background-position:-80% 0}}
 .hero p{
   margin-top:34px;max-width:52ch;font-size:clamp(16px,1.4vw,20px);
-  color:var(--ink-soft);font-weight:300;position:relative;z-index:2;
+  color:rgba(255,255,255,.88);font-weight:300;text-shadow:0 1px 16px rgba(13,35,28,.6);
+  position:relative;z-index:2;
 }
 .hero-ctas{display:flex;gap:18px;margin-top:44px;flex-wrap:wrap;justify-content:center;position:relative;z-index:2}
 .btn{
@@ -125,11 +132,11 @@ h1{
 }
 .btn-gold{background:var(--gold);color:#fff}
 .btn-gold:hover{background:var(--ever);transform:translateY(-2px)}
-.btn-ghost{border:1px solid var(--line);color:var(--ink)}
-.btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+.btn-ghost{border:1px solid rgba(255,255,255,.5);color:#fff}
+.btn-ghost:hover{border-color:var(--gold-soft);color:var(--gold-soft)}
 .scroll-cue{
   position:absolute;bottom:26px;left:50%;transform:translateX(-50%);
-  color:rgba(28,43,37,.4);font-family:var(--display);font-size:11px;letter-spacing:.34em;text-transform:uppercase;
+  color:rgba(255,255,255,.6);font-family:var(--display);font-size:11px;letter-spacing:.34em;text-transform:uppercase;
   display:flex;flex-direction:column;align-items:center;gap:10px;
 }
 .scroll-cue::after{content:"";width:1px;height:40px;background:linear-gradient(to bottom,var(--gold),transparent);animation:drip 2.4s ease infinite}
@@ -291,15 +298,6 @@ footer{background:var(--ever-deep);color:#fff;border-top:1px solid rgba(255,255,
 }
 .fab.show{opacity:1;transform:none}
 .fab:hover{background:var(--ever);transform:translateY(-3px)}
-
-/* ---------- branch banner ---------- */
-.branch-fig{margin:0}
-.branch-img{
-  width:100%;display:block;border-radius:6px;
-  box-shadow:0 30px 70px -34px rgba(22,52,43,.45);
-  border:1px solid var(--line);
-}
-.branch-note{margin-top:16px;font-size:12.5px;color:rgba(28,43,37,.45)}
 
 /* ---------- panorama ---------- */
 .pano{position:relative;overflow:hidden;line-height:0}
@@ -542,16 +540,6 @@ footer{background:var(--ever-deep);color:#fff;border-top:1px solid rgba(255,255,
   </div>
   <div class="press-note">Outlets shown in coverage featured on integrity.com, July 2026. Names referenced descriptively.</div>
 </div>
-
-<section id="branch" style="padding-top:110px">
-  <div class="container">
-    <div class="section-tag reveal">The branch office</div>
-    <figure class="branch-fig reveal d1">
-      <img class="branch-img" src="branch-hero.jpg" alt="Branch banner artwork over the Dallas skyline with the [BRANCH NAME] placeholder" loading="lazy">
-      <figcaption class="branch-note">Branch banner artwork for the demonstration. [BRANCH NAME] remains a placeholder until the branch engages.</figcaption>
-    </figure>
-  </div>
-</section>
 
 <section class="closing">
   <h2 class="reveal">Good days ahead begin with a <b>good partner.</b></h2>
