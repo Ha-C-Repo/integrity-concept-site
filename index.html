@@ -275,6 +275,16 @@ footer{background:var(--ever-deep);color:#fff;border-top:1px solid rgba(255,255,
 .fab.show{opacity:1;transform:none}
 .fab:hover{background:var(--ever);transform:translateY(-3px)}
 
+/* ---------- panorama ---------- */
+.pano{position:relative;overflow:hidden;line-height:0}
+.pano svg{width:100%;height:auto;display:block}
+.pano .cap{
+  position:absolute;left:5vw;bottom:12%;line-height:1.4;color:#fff;text-align:left;
+}
+.pano .cap .tag{font-family:var(--display);font-size:11px;letter-spacing:.4em;text-transform:uppercase;font-weight:700;color:var(--gold-soft)}
+.pano .cap .big{font-family:var(--display);font-weight:300;font-size:clamp(22px,3vw,44px);letter-spacing:.08em;text-transform:uppercase;margin-top:8px}
+.pano .cap .big b{color:var(--gold-soft);font-weight:600}
+
 /* ---------- reveal ---------- */
 .reveal{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.19,1,.22,1),transform .9s cubic-bezier(.19,1,.22,1)}
 .reveal.on{opacity:1;transform:none}
@@ -373,6 +383,71 @@ footer{background:var(--ever-deep);color:#fff;border-top:1px solid rgba(255,255,
     </div>
   </div>
 </section>
+
+<div class="pano" aria-label="Stylized dusk panorama of the Dallas skyline">
+  <svg viewBox="0 0 1440 520" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" role="img">
+    <defs>
+      <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#0D231C"/>
+        <stop offset="46%" stop-color="#16342B"/>
+        <stop offset="78%" stop-color="#7A6530"/>
+        <stop offset="100%" stop-color="#C09B42"/>
+      </linearGradient>
+      <radialGradient id="sun2" cx="0.5" cy="0.5" r="0.5">
+        <stop offset="0%" stop-color="#EBD9A8"/>
+        <stop offset="45%" stop-color="#D8BC77" stop-opacity=".85"/>
+        <stop offset="100%" stop-color="#C09B42" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
+    <rect width="1440" height="520" fill="url(#sky)"/>
+    <g id="sunGroup">
+      <circle cx="990" cy="358" r="150" fill="url(#sun2)"/>
+      <circle cx="990" cy="358" r="60" fill="#EBD9A8"/>
+      <circle cx="990" cy="358" r="210" stroke="#D8BC77" stroke-opacity=".28" fill="none"/>
+      <circle cx="990" cy="358" r="280" stroke="#D8BC77" stroke-opacity=".16" fill="none"/>
+      <circle cx="990" cy="358" r="350" stroke="#D8BC77" stroke-opacity=".08" fill="none"/>
+    </g>
+    <!-- skyline silhouette, original stylized Dallas -->
+    <g fill="#0D231C">
+      <rect x="0" y="470" width="1440" height="50"/>
+      <rect x="40" y="380" width="70" height="95"/>
+      <rect x="120" y="410" width="46" height="65"/>
+      <!-- reunion tower -->
+      <rect x="212" y="330" width="8" height="145"/>
+      <circle cx="216" cy="318" r="26"/>
+      <rect x="250" y="360" width="80" height="115"/>
+      <polygon points="250,360 290,332 330,360"/>
+      <rect x="345" y="300" width="64" height="175"/>
+      <rect x="420" y="345" width="95" height="130"/>
+      <rect x="530" y="260" width="72" height="215"/>
+      <polygon points="530,260 566,236 602,260"/>
+      <rect x="615" y="320" width="55" height="155"/>
+      <rect x="682" y="282" width="88" height="193"/>
+      <rect x="782" y="352" width="60" height="123"/>
+      <rect x="855" y="304" width="78" height="171"/>
+      <rect x="945" y="366" width="52" height="109"/>
+      <rect x="1010" y="330" width="86" height="145"/>
+      <rect x="1108" y="376" width="58" height="99"/>
+      <rect x="1178" y="342" width="74" height="133"/>
+      <rect x="1264" y="396" width="52" height="79"/>
+      <rect x="1328" y="366" width="70" height="109"/>
+      <rect x="1408" y="410" width="32" height="65"/>
+    </g>
+    <!-- window lights -->
+    <g fill="#D8BC77" opacity=".7">
+      <rect x="356" y="318" width="5" height="5"/><rect x="372" y="340" width="5" height="5"/><rect x="390" y="318" width="5" height="5"/>
+      <rect x="545" y="286" width="5" height="5"/><rect x="562" y="310" width="5" height="5"/><rect x="580" y="286" width="5" height="5"/>
+      <rect x="700" y="306" width="5" height="5"/><rect x="722" y="330" width="5" height="5"/><rect x="744" y="306" width="5" height="5"/>
+      <rect x="870" y="330" width="5" height="5"/><rect x="895" y="352" width="5" height="5"/>
+      <rect x="1030" y="352" width="5" height="5"/><rect x="1055" y="376" width="5" height="5"/>
+      <rect x="1195" y="366" width="5" height="5"/><rect x="1218" y="390" width="5" height="5"/>
+    </g>
+  </svg>
+  <div class="cap">
+    <div class="tag">Dallas, Texas</div>
+    <div class="big">Home since <b>2006.</b></div>
+  </div>
+</div>
 
 <section class="dark" id="people">
   <div class="container">
@@ -520,19 +595,34 @@ if(matchMedia('(pointer:fine)').matches){
   });
 }
 
-// gold dust particles in hero
+// hero ambient: golden bokeh light (original stand-in for the video hero) + fine dust
 const cv=document.getElementById('dust');
 if(cv&&matchMedia('(prefers-reduced-motion: no-preference)').matches){
-  const ctx=cv.getContext('2d');let W,H,P=[],mx=-999,my=-999;
+  const ctx=cv.getContext('2d');let W,H,B=[],P=[],mx=-999,my=-999;
   const size=()=>{W=cv.width=cv.offsetWidth;H=cv.height=cv.offsetHeight};
   size();addEventListener('resize',size);
+  const NB=Math.min(16,Math.floor(innerWidth/90));
+  for(let i=0;i<NB;i++)B.push({x:Math.random(),y:Math.random(),r:26+Math.random()*64,s:.02+Math.random()*.05,o:.05+Math.random()*.1,ph:Math.random()*6.28,dr:Math.random()>.5?1:-1});
   const N=Math.min(60,Math.floor(innerWidth/24));
-  for(let i=0;i<N;i++)P.push({x:Math.random()*1e4%1,y:Math.random()*1e4%1,r:.8+Math.random()*1.8,s:.06+Math.random()*.18,o:.15+Math.random()*.4,ph:Math.random()*6.28});
+  for(let i=0;i<N;i++)P.push({x:Math.random(),y:Math.random(),r:.8+Math.random()*1.8,s:.06+Math.random()*.18,o:.15+Math.random()*.4,ph:Math.random()*6.28});
   cv.parentElement.addEventListener('mousemove',e=>{const r=cv.getBoundingClientRect();mx=e.clientX-r.left;my=e.clientY-r.top});
   cv.parentElement.addEventListener('mouseleave',()=>{mx=my=-999});
   let t=0;
   (function loop(){
     t+=.016;ctx.clearRect(0,0,W,H);
+    // bokeh: soft out-of-focus golden lights, slow celebratory drift
+    B.forEach(b=>{
+      const bx=b.x*W+Math.sin(t*b.s*6+b.ph)*60*b.dr;
+      const by=(b.y*H - (t*b.s*22)%(H+200))+100;
+      const yy=by<-100?by+H+200:by;
+      const pulse=b.o*(0.75+0.25*Math.sin(t*1.4+b.ph));
+      const g=ctx.createRadialGradient(bx,yy,0,bx,yy,b.r);
+      g.addColorStop(0,`rgba(216,188,119,${pulse})`);
+      g.addColorStop(.6,`rgba(192,155,66,${pulse*.55})`);
+      g.addColorStop(1,'rgba(192,155,66,0)');
+      ctx.beginPath();ctx.arc(bx,yy,b.r,0,6.28);ctx.fillStyle=g;ctx.fill();
+    });
+    // dust sparks
     P.forEach(p=>{
       let px=p.x*W+Math.sin(t*p.s*8+p.ph)*24, py=(p.y*H - (t*p.s*36)%(H+60))+30;
       if(py<-30)py+=H+60;
@@ -543,6 +633,19 @@ if(cv&&matchMedia('(prefers-reduced-motion: no-preference)').matches){
     });
     requestAnimationFrame(loop);
   })();
+}
+
+// panorama sun parallax
+const sunG=document.getElementById('sunGroup');
+if(sunG&&matchMedia('(prefers-reduced-motion: no-preference)').matches){
+  addEventListener('scroll',()=>{
+    const pano=sunG.closest('svg').parentElement.getBoundingClientRect();
+    const vh=innerHeight;
+    if(pano.top<vh&&pano.bottom>0){
+      const prog=1-(pano.top+pano.height/2)/(vh+pano.height/2);
+      sunG.setAttribute('transform',`translate(0 ${(-40+prog*80).toFixed(1)})`);
+    }
+  },{passive:true});
 }
 </script>
 </body>
